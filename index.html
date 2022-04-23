@@ -12,13 +12,15 @@
         // Create variable to accept user input
         // Ask user for input
             let input= prompt('Type "rock", "paper", or "scissors"')
+            // Variable to make input case-insensitive
+
             
             // Output error message if selection does not match one of 'rock, 'paper', or 'scissors' and re-prompt for input
-                while(input!='rock'&&input!='paper'&&input!='scissors') {
+                while(input.toLowerCase()!='rock'&&input.toLowerCase()!='paper'&&input.toLowerCase()!='scissors') {
                     alert('Please enter either "rock", "paper", or "scissors"')
                     input = prompt('Type "rock", "paper", or "scissors"')
                 }
-                console.log('Your selection: ' + input)
+                console.log('Your selection: ' + input.toLowerCase())
 
         // Create variable for array of computer choices
             let compChoices = [
@@ -31,17 +33,17 @@
             console.log('Computer selection: ' + compRand)
 
         // if statements to determine winner & output message to communicate results
-            if(input==='rock') {
+            if(input.toLowerCase()==='rock') {
                 if(compRand==='rock') {alert('You both selected rock, it\'s a tie!')}
                 else if(compRand==='paper') {alert('Paper beats rock, computer wins!')}
                 else if(compRand==='scissors') {alert('Rock beats scissors, you win!')}
             }
-            else if(input==='paper') {
+            else if(input.toLowerCase()==='paper') {
                 if(compRand==='paper') {alert('You both selected paper, it\'s a tie!')}
                 else if(compRand==='rock') {alert('Paper beats rock, you win!')}
                 else if(compRand==='scissors') {alert('Scissors beats paper, computer wins!')}
             }
-            else if(input==='scissors') {
+            else if(input.toLowerCase==='scissors') {
                 if(compRand==='scissors') {alert('You both selected scissors, it\'s a tie!')}
                 else if(compRand==='paper') {alert('Scissors beats paper, you win!')}
                 else if(compRand==='rock') {alert('Rock beats scissors, computer wins!')}
@@ -49,5 +51,5 @@
 
         </script>
     </body>
-    
+
 </html>
