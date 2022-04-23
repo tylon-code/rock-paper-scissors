@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <script>
+
+    // Create variable to accept user input
+    // Ask user for input
+        let input= prompt('Type "rock", "paper", or "scissors"')
+        
+        // Output error message if selection does not match one of 'rock, 'paper', or 'scissors' and re-prompt for input
+            while(input!='rock'&&input!='paper'&&input!='scissors') {
+                alert('Please enter either "rock", "paper", or "scissors"')
+                input = prompt('Type "rock", "paper", or "scissors"')
+            }
+            console.log('Your selection: ' + input)
+
+    // Create variable for array of computer choices
+        let compChoices = [
+            'rock',
+            'paper',
+            'scissors'];
+
+    // Receive randomized computer choice from array
+        let compRand = compChoices[Math.floor(Math.random()*compChoices.length)]
+        console.log('Computer selection: ' + compRand)
+
+    // if statements to determine winner & output message to communicate results
+        if(input==='rock') {
+            if(compRand==='rock') {alert('You both selected rock, it\'s a tie!')}
+            else if(compRand==='paper') {alert('Paper beats rock, computer wins!')}
+            else if(compRand==='scissors') {alert('Rock beats scissors, you win!')}
+        }
+        else if(input==='paper') {
+            if(compRand==='paper') {alert('You both selected paper, it\'s a tie!')}
+            else if(compRand==='rock') {alert('Paper beats rock, you win!')}
+            else if(compRand==='scissors') {alert('Scissors beats paper, computer wins!')}
+        }
+        else if(input==='scissors') {
+            if(compRand==='scissors') {alert('You both selected scissors, it\'s a tie!')}
+            else if(compRand==='paper') {alert('Scissors beats paper, you win!')}
+            else if(compRand==='rock') {alert('Rock beats scissors, computer wins!')}
+        }
+
+    </script>
+
+</html>
