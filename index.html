@@ -6,90 +6,102 @@
     </head>
 
     <body>
-        
+        <button>Play!</button>
+
         <script>
-        // 5 round game
+        // Button to start the game
+        const playButton=document.querySelector('button')
+        playButton.addEventListener('click',game)
+
+        // First to 3 wins game
         function game() {
-            // Limit game to 5 rounds
-            for (let i=0; i<5; i++) {
-        // Determine computer's selection
+            
+            // Variables to track score
+            let wins=0
+            let loss=0
+            let draw=0
+            // Limit game to first to 3 wins
+            for (let i=0; wins<3&&loss<3; i++) {
+                // Determine computer's selection
                 function computerPlay() {
-                // Create variable for array of computer choices
+                    // Create variable for array of computer choices
                     let compChoices = [
                         'rock',
                         'paper',
-                        'scissors'];
-                
-                // Receive randomized computer choice from array
-                return compChoices[Math.floor(Math.random()*compChoices.length)]
+                        'scissors'];              
+                    // Receive randomized computer choice from array
+                    return compChoices[Math.floor(Math.random()*compChoices.length)]
                 }
-            // Variable for computer's selection
+                // Variable for computer's selection
                 const computerSelection = computerPlay()
-                console.log(`Computer selection: ` + computerSelection)
 
-            // Determine player's selection
-                function input() {
-                // Create variable for user input and ask user for input
-                    let choice = prompt('Type "rock", "paper", or "scissors"')
-                // Output error message if selection does not match one of 'rock, 'paper', or 'scissors' and re-prompt for input
+                // Determine player's selection
+                function input() {                  
+                    // Create variable for user input and ask user for input
+                    let choice = prompt('Type "rock", "paper", or "scissors"'); 
+                    if (typeof choice==='object') {alert('Please enter either "rock", "paper", or "scissors"')}
+                    else {             
+                    // Output error message if selection does not match one of 'rock, 'paper', or 'scissors' and re-prompt for input
                     while(choice.toLowerCase()!='rock'&&choice.toLowerCase()!='paper'&&choice.toLowerCase()!='scissors') {
                         alert('Please enter either "rock", "paper", or "scissors"')
                         choice = prompt('Type "rock", "paper", or "scissors"')}
-                    
                     return choice.toLowerCase()
                     }
-            // Variable for player's selection
+                }      
+                // Variable for player's selection
                 const playerSelection = input()
-                console.log(`Player selection: ` + playerSelection)
-                
-            // Variables to track score
-                let wins=0
-                let loss=0
-                let draw=0
 
-            // Play a round
-                function playRound(playerSelection, computerSelection) {
-                    
-                // if statements to determine winner & output message to communicate results & track score
+                // Play a round
+                function playRound(playerSelection, computerSelection) {                   
+                    // if statements to determine winner, track score, & output message to communicate results
                     if(playerSelection==='rock') {
                         if(computerSelection==='rock') {result= ('You both selected rock, it\'s a tie!'); 
-                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${++draw}`); 
-                            return (`${result} \n ${score}`)}
+                            draw= ++draw;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='paper') {result= ('Paper beats rock, computer wins!');
-                            score = (`Player score: ${wins}    Computer score: ${++loss}    Draws: ${draw}`); 
-                            return (`${result} \n ${score}`)}
+                            loss= ++loss;
+                            score = (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='scissors') {result = ('Rock beats scissors, you win!');
-                            score = (`Player score: ${++wins}    Computer score: ${loss}    Draws: ${draw}`); 
-                            return (`${result} \n ${score}`)}
+                            wins= ++wins;
+                            score = (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
+                            return (`${result}\n${score}`)}
                     }
                     else if(playerSelection==='paper') {
                         if(computerSelection==='paper') {result= ('You both selected paper, it\'s a tie!');
                             score=(`Player score: ${wins}    Computer score: ${loss}    Draws: ${++draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='rock') {result= ('Paper beats rock, you win!');
                             score= (`Player score: ${++wins}    Computer score: ${loss}    Draws: ${draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='scissors') {result= ('Scissors beats paper, computer wins!');
                             score= (`Player score: ${wins}    Computer score: ${++loss}    Draws: ${draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                     }
                     else if(playerSelection==='scissors') {
                         if(computerSelection==='scissors') {result= ('You both selected scissors, it\'s a tie!');
                             score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${++draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='paper') {result= ('Scissors beats paper, you win!');
                             score= (`Player score: ${++wins}    Computer score: ${loss}    Draws: ${draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                         else if(computerSelection==='rock') {result= ('Rock beats scissors, computer wins!');
                             score= (`Player score: ${wins}    Computer score: ${++loss}    Draws: ${draw}`);
-                            return (`${result} \n ${score}`)}
+                            return (`${result}\n${score}`)}
                     }
                 }
                 console.log(playRound(playerSelection,computerSelection))
-        }    
-            }
-            // find a way to return the score at the end of each round instead of as a result of each if statement --> if statements only return the result and then the score is displayed at the end of the playRound
-            // button to start game
+            } 
+
+                // Return the final score at the end of the first-to-3 game
+                function outcome() {
+                    if(wins>loss) {return(`YOU WON!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
+                    else if(wins<loss) {return (`YOU LOST!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
+                    else {return (`IT'S A DRAW!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
+                }
+                console.log(outcome())
+        }
         </script>
     </body>
 
