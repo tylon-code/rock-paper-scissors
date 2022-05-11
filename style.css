@@ -1,0 +1,48 @@
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 127, 80, 0.603);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(137, 196, 245, 0.959);
+    font-size: 20px;
+}
+
+.buttons {
+    margin: 0px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rpsButtons {
+    margin-top: 30px;
+    display: flex;
+}
+img {
+    max-width: 100px;
+    max-height: 100px;
+}
+.rpsButtons button{
+    margin: 10px;
+    display: flex;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+#outcome {
+    font-size: 24px;
+    font-weight: bold;
+}
