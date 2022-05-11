@@ -2,28 +2,54 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Rock Paper Scissors</title>
+        <title>RPS working copy</title>
     </head>
 
     <body>
-        <button>Play!</button>
+        
+        <div class="playerSelect">
+            <button id="play">Play Game!</button>
+            <br>
+            <br>
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+<br>
+        <div class="score">
+            <div>
+                <h3>Score</h3>
+                <p id="score"></p>
+                <p id="msg"></p>
+                <p id="outcome"></p>
+            </div>
+            
+        </div>
 
         <script>
-        // Button to start the game
-        const playButton=document.querySelector('button')
-        playButton.addEventListener('click',game)
+            let scoreBoard=document.querySelector('#score')
+            let msg=document.querySelector('#msg')
+            let msgOutcome=document.querySelector('#outcome')
+            const playButton=document.querySelector('#play')
+            playButton.addEventListener('click',game)
 
-        // First to 3 wins game
+    // Start a game
         function game() {
+           
+            let score= `Player score: 0    Computer score: 0    Draws: 0`
+            scoreBoard.textContent=`${score}`
             
-            // Variables to track score
-            let wins=0
-            let loss=0
-            let draw=0
-            // Limit game to first to 3 wins
-            for (let i=0; wins<3&&loss<3; i++) {
-                // Determine computer's selection
-                function computerPlay() {
+            let result='Let\'s play!'
+            msg.textContent=`${result}`
+            let outcome=''
+            msgOutcome.textContent=`${outcome}`
+
+            let wins = 0
+            let loss = 0
+            let draw = 0
+
+        // Determine computer's selection
+            function computerPlay() {
                     // Create variable for array of computer choices
                     let compChoices = [
                         'rock',
@@ -33,75 +59,97 @@
                     return compChoices[Math.floor(Math.random()*compChoices.length)]
                 }
                 // Variable for computer's selection
-                const computerSelection = computerPlay()
+                let computerSelection = computerPlay()
+                
+        // Determine player's selection
+            let playerSelection = ''
+            const rockSelect = document.querySelector('#rock')
+                rockSelect.addEventListener('click',() => {
+                    playerSelection='rock'; 
+                    clickFunc();
+                })
+                
+                const paperSelect = document.querySelector('#paper')
+                paperSelect.addEventListener('click',() => {
+                    playerSelection='paper'; 
+                    clickFunc();
+                })
+                
+                const scissorsSelect = document.querySelector('#scissors')
+                scissorsSelect.addEventListener('click',() => {
+                    playerSelection='scissors'; 
+                    clickFunc();
+                })           
 
-                // Determine player's selection
-                function input() {                  
-                    // Create variable for user input and ask user for input
-                    let choice = prompt('Type "rock", "paper", or "scissors"'); 
-                    if (typeof choice==='object') {alert('Please enter either "rock", "paper", or "scissors"')}
-                    else {             
-                    // Output error message if selection does not match one of 'rock, 'paper', or 'scissors' and re-prompt for input
-                    while(choice.toLowerCase()!='rock'&&choice.toLowerCase()!='paper'&&choice.toLowerCase()!='scissors') {
-                        alert('Please enter either "rock", "paper", or "scissors"')
-                        choice = prompt('Type "rock", "paper", or "scissors"')}
-                    return choice.toLowerCase()
-                    }
-                }      
-                // Variable for player's selection
-                const playerSelection = input()
-
-                // Play a round
+            // Actions to be run when the RPS buttons are clicked
+                function clickFunc() {
+                    computerSelection = computerPlay(); 
+                    playRound(playerSelection, computerSelection);
+                    msg.textContent=`${result}`;
+                    scoreBoard.textContent=`${score}`;
+                    update();
+                    msgOutcome.textContent=`${outcome}`
+                }
+            // Play a round
                 function playRound(playerSelection, computerSelection) {                   
                     // if statements to determine winner, track score, & output message to communicate results
                     if(playerSelection==='rock') {
                         if(computerSelection==='rock') {result= ('You both selected rock, it\'s a tie!'); 
                             draw= ++draw;
                             score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
-                            return (`${result}\n${score}`)}
+                            
+                        }
                         else if(computerSelection==='paper') {result= ('Paper beats rock, computer wins!');
                             loss= ++loss;
                             score = (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
-                            return (`${result}\n${score}`)}
+                            
+                        }
                         else if(computerSelection==='scissors') {result = ('Rock beats scissors, you win!');
                             wins= ++wins;
                             score = (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`); 
-                            return (`${result}\n${score}`)}
+                          
+                        }
                     }
                     else if(playerSelection==='paper') {
                         if(computerSelection==='paper') {result= ('You both selected paper, it\'s a tie!');
-                            score=(`Player score: ${wins}    Computer score: ${loss}    Draws: ${++draw}`);
-                            return (`${result}\n${score}`)}
+                            draw= ++draw;
+                            score=(`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                         else if(computerSelection==='rock') {result= ('Paper beats rock, you win!');
-                            score= (`Player score: ${++wins}    Computer score: ${loss}    Draws: ${draw}`);
-                            return (`${result}\n${score}`)}
+                            wins= ++wins;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                         else if(computerSelection==='scissors') {result= ('Scissors beats paper, computer wins!');
-                            score= (`Player score: ${wins}    Computer score: ${++loss}    Draws: ${draw}`);
-                            return (`${result}\n${score}`)}
+                            loss= ++loss;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                     }
                     else if(playerSelection==='scissors') {
                         if(computerSelection==='scissors') {result= ('You both selected scissors, it\'s a tie!');
-                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${++draw}`);
-                            return (`${result}\n${score}`)}
+                            draw= ++draw;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                         else if(computerSelection==='paper') {result= ('Scissors beats paper, you win!');
-                            score= (`Player score: ${++wins}    Computer score: ${loss}    Draws: ${draw}`);
-                            return (`${result}\n${score}`)}
+                            wins= ++wins;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                         else if(computerSelection==='rock') {result= ('Rock beats scissors, computer wins!');
-                            score= (`Player score: ${wins}    Computer score: ${++loss}    Draws: ${draw}`);
-                            return (`${result}\n${score}`)}
+                            loss= ++loss;
+                            score= (`Player score: ${wins}    Computer score: ${loss}    Draws: ${draw}`);
+                        }
                     }
                 }
-                console.log(playRound(playerSelection,computerSelection))
-            } 
 
-                // Return the final score at the end of the first-to-3 game
-                function outcome() {
-                    if(wins>loss) {return(`YOU WON!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
-                    else if(wins<loss) {return (`YOU LOST!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
-                    else {return (`IT'S A DRAW!\nThe final score is Player: ${wins}   Computer: ${loss}`)}
+            // Function to limit the game to first to 5 wins and output an outcome message
+                function update() {
+                    if(wins===5||loss===5){
+                        if(wins>loss) {outcome = `YOU WON!\nThe final score is Player: ${wins}   Computer: ${loss}`;wins=0;loss=0;draw=0}
+                        else if(wins<loss) {outcome = `YOU LOST!\nThe final score is Player: ${wins}   Computer: ${loss}`;wins=0;loss=0;draw=0}
+                        else {outcome=`IT'S A DRAW!\nThe final score is Player: ${wins}   Computer: ${loss}`;wins=0;loss=0;draw=0}
+                    }
+                    else {outcome=""}
                 }
-                console.log(outcome())
-        }
+            }
         </script>
     </body>
 
